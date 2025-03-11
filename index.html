@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gorgeous Digital Header</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000;
+            margin: 0;
+        }
+
+        .header-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 90%;
+            max-width: 700px;
+            padding: 40px;
+            border-radius: 20px;
+            border: 5px solid transparent;
+            position: relative;
+            text-align: center;
+            overflow: hidden;
+            animation: neon-border 2s infinite alternate;
+            box-shadow: 0 0 15px #ffcc00, 0 0 30px #ff9900;
+        }
+
+        @keyframes neon-border {
+            0% { box-shadow: 0 0 10px #ffcc00, 0 0 30px #ff9900, 0 0 50px #ff6600; }
+            100% { box-shadow: 0 0 20px #ffcc00, 0 0 40px #ff9900, 0 0 60px #ff6600; }
+        }
+
+        /* Fixed Text - Letter by Letter Effect */
+        .fixed-text {
+            font-size: 45px;
+            font-weight: bold;
+            color: #ffcc00;
+            font-family: 'Arial Black', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            text-shadow: 0 0 10px #ffcc00, 0 0 20px #ff9900, 0 0 30px #ff6600;
+            overflow: hidden;
+            white-space: nowrap;
+            display: inline-block;
+            max-width: 100%;
+        }
+
+        /* Moving Text with Multiple Effects */
+        .moving-text {
+            font-size: 35px;
+            font-weight: bold;
+            color: #00ffff;
+            font-family: 'Arial Black', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px #00ffff, 0 0 20px #0099ff, 0 0 30px #0066ff;
+            text-align: center;
+            margin-top: 20px;
+            max-width: 100%;
+            word-wrap: break-word;
+            padding: 0 10px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .fixed-text { font-size: 35px; }
+            .moving-text { font-size: 30px; }
+            .header-container { width: 95%; padding: 30px; }
+        }
+
+        /* Moving Text Effects */
+        .effect1 { animation: fadeInOut 2s infinite alternate; }
+        .effect2 { animation: scaleUpDown 2s infinite alternate; }
+        .effect3 { animation: rotateText 2s infinite alternate; }
+        .effect4 { animation: skewText 2s infinite alternate; }
+        .effect5 { animation: bounceText 2s infinite alternate; }
+        .effect6 { animation: perspectiveMove 2s infinite alternate; }
+
+        /* Multiple Effects */
+        @keyframes fadeInOut { 0% { opacity: 0; } 100% { opacity: 1; } }
+        @keyframes scaleUpDown { 0% { transform: scale(1); } 100% { transform: scale(1.2); } }
+        @keyframes rotateText { 0% { transform: rotate(0deg); } 100% { transform: rotate(5deg); } }
+        @keyframes skewText { 0% { transform: skewX(0deg); } 100% { transform: skewX(10deg); } }
+        @keyframes bounceText { 0% { transform: translateY(0px); } 100% { transform: translateY(-10px); } }
+        @keyframes perspectiveMove { 0% { transform: perspective(500px) rotateX(10deg); } 100% { transform: perspective(500px) rotateX(0deg); } }
+
+    </style>
+</head>
+<body>
+
+    <div class="header-container">
+        <div class="fixed-text" id="fixedText"></div>
+        <div class="moving-text effect1" id="movingText">Savings greater than</div>
+    </div>
+
+    <script>
+        const fixedText = "SAVINGS GUARANTEE";
+        const fixedTextElement = document.getElementById("fixedText");
+        let fixedIndex = 0;
+        let forward = true;
+
+        function animateFixedText() {
+            if (forward) {
+                fixedTextElement.textContent = fixedText.slice(0, fixedIndex);
+                fixedIndex++;
+                if (fixedIndex > fixedText.length) {
+                    forward = false;
+                    setTimeout(() => { forward = true; fixedIndex = 0; }, 2000);
+                }
+            }
+        }
+
+        setInterval(animateFixedText, 200);
+
+        const messages = ["Savings greater than", "Project cost or it's FREE!"];
+        const effects = ["effect1", "effect2", "effect3", "effect4", "effect5", "effect6"];
+        let textIndex = 0, effectIndex = 0;
+
+        function changeMessage() {
+            let movingText = document.getElementById("movingText");
+            movingText.textContent = messages[textIndex];
+
+            movingText.classList.remove(effects[effectIndex]);
+
+            textIndex = (textIndex + 1) % messages.length;
+            effectIndex = (effectIndex + 1) % effects.length;
+
+            movingText.classList.add(effects[effectIndex]);
+        }
+
+        setInterval(changeMessage, 3000);
+    </script>
+
+</body>
+</html>
